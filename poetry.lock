@@ -215,21 +215,19 @@ files = [
 
 [[package]]
 name = "local-tuya"
-version = "1.2.5"
+version = "2.0.0"
 description = "Interface to Tuya devices over LAN."
 category = "main"
 optional = false
 python-versions = ">=3.7,<3.12"
 files = [
-    {file = "local_tuya-1.2.5-py3-none-any.whl", hash = "sha256:bdef4e6b5644aa6d2534063cdaf73a5b1795182501a2774f511b7c62d3c14eca"},
-    {file = "local_tuya-1.2.5.tar.gz", hash = "sha256:ea9216353051a7bf3e5103df9104186a1335baa2311e0f513fe0079bd11c7087"},
+    {file = "local_tuya-2.0.0-py3-none-any.whl", hash = "sha256:479db01001eeb3fbf6a360902d60096ac0e9e5fe31a00d4e20b47009ff582c49"},
+    {file = "local_tuya-2.0.0.tar.gz", hash = "sha256:c09d8f3fc4e30ff9e532597f006b2f766b0b4bccba062c6e77a03a3ead90a9dd"},
 ]
 
 [package.dependencies]
 concurrent-tasks = ">=1.3,<2"
-importlib-metadata = {version = ">=4,<5", markers = "python_version < \"3.8\""}
 pycryptodomex = ">=3,<4"
-xmltodict = ">=0.13,<0.14"
 
 [[package]]
 name = "mypy"
@@ -699,4 +697,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.7,<3.12"
-content-hash = "b6105ab147ce725742a16ed691e5371c9395855fe5bc067a8d8c98de7b8c865d"
+content-hash = "4bb29370fd708b5f2892822600f5041a810148e8c5e7d6fef829a176ffc35913"
