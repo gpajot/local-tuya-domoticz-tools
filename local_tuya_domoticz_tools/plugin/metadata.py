@@ -1,19 +1,14 @@
 from __future__ import annotations
 
-import sys
 from collections.abc import Mapping
 from dataclasses import dataclass
+from importlib.metadata import metadata as pkg_metadata
 from typing import Dict, List, Optional, Tuple, Type, Union
 
 import xmltodict
 from local_tuya import Version
 
 from local_tuya_domoticz_tools.units import UnitId
-
-if sys.version_info < (3, 8):
-    from importlib_metadata import metadata as pkg_metadata
-else:
-    from importlib.metadata import metadata as pkg_metadata
 
 XML = Union[str, Dict[str, "XML"], List["XML"]]
 

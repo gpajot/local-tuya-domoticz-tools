@@ -1,4 +1,3 @@
-import sys
 from logging import NullHandler
 from typing import Any
 
@@ -91,10 +90,6 @@ def plugin(
         plugin.stop()
 
 
-@pytest.mark.skipif(
-    sys.version_info < (3, 8),
-    reason="requires python3.8 or higher for AsyncMock",
-)
 @pytest.mark.usefixtures("plugin")
 def test_start(
     plugin,
@@ -127,10 +122,6 @@ def test_start(
     )
 
 
-@pytest.mark.skipif(
-    sys.version_info < (3, 8),
-    reason="requires python3.8 or higher for AsyncMock",
-)
 def test_on_command(plugin, manager):
     plugin.on_command(1, UnitCommand("cmd", 10.2, ""))
     plugin.stop()  # drain pool
