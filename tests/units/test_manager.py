@@ -1,5 +1,3 @@
-import sys
-
 import pytest
 from local_tuya import State
 
@@ -72,10 +70,6 @@ def test_register_not_included(unit_two, domoticz_unit_two, manager):
     domoticz_unit_two.Delete.assert_called_once()
 
 
-@pytest.mark.skipif(
-    sys.version_info < (3, 8),
-    reason="requires python3.8 or higher for AsyncMock",
-)
 async def test_on_command(manager, unit_one):
     await manager.on_command(1, UnitCommand("cmd", 10.2, ""))
 

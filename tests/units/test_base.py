@@ -1,5 +1,3 @@
-import sys
-
 import pytest
 
 from local_tuya_domoticz_tools.units.base import Unit, UnitCommand, UnitValues
@@ -20,8 +18,6 @@ def domoticz_init(mocker, domoticz_unit):
 
 @pytest.fixture()
 def command_func(mocker):
-    if sys.version_info < (3, 8):
-        return None
     return mocker.AsyncMock()
 
 
@@ -60,8 +56,7 @@ def test_unit_update(unit, domoticz_unit):
 async def test_on_command(unit, command_func):
     await unit.on_command(UnitCommand("cmd", 1.1, ""))
 
-    if command_func:
-        command_func.assert_awaited_once_with("cmd-1.1")
+    command_func.assert_awaited_once_with("cmd-1.1")
 
 
 def test_update(unit, domoticz_unit):
