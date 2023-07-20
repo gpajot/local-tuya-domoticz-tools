@@ -22,7 +22,7 @@ pytest-mock = "==3.10.0"
 ruff = "==0.0.270"
 mypy = "==1.4.1"
 black = "==23.7.0"
-pre-commit = "==3.3.2"
+pre-commit = "==3.3.3"
 
 [build-system]
 requires = ["poetry-core"]
