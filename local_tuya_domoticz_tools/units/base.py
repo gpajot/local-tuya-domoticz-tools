@@ -106,9 +106,8 @@ class Unit(Generic[T]):
         else:
             # Update some unit attributes.
             unit.Image = self._image
-            # Should be read/write but raises `AttributeError: readonly attribute`.
-            # if self._options:
-            #     unit.Options = self._options
+            if self._options:
+                unit.Options = self._options
             unit.Update(False)
         self._unit = unit
 
