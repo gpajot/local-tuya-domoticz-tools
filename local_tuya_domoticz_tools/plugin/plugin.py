@@ -72,9 +72,11 @@ class Plugin(Generic[T]):
         manager: UnitManager[T] = UnitManager(
             name=name,
             units=devices[name].Units if name in devices else {},
-            included_units=self._unit_ids.included(included_units)
-            if self._unit_ids and included_units
-            else None,
+            included_units=(
+                self._unit_ids.included(included_units)
+                if self._unit_ids and included_units
+                else None
+            ),
         )
         self._manager = manager
 
