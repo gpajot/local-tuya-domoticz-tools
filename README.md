@@ -1,4 +1,9 @@
 # local-tuya-domoticz-tools
+
+[![tests](https://github.com/gpajot/local-tuya-domoticz-tools/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/gpajot/local-tuya-domoticz-tools/actions/workflows/test.yml?query=branch%3Amain+event%3Apush)
+[![version](https://img.shields.io/pypi/v/local_tuya_domoticz_tools?label=stable)](https://pypi.org/project/local_tuya_domoticz_tools/)
+[![python](https://img.shields.io/pypi/pyversions/local_tuya_domoticz_tools)](https://pypi.org/project/local_tuya_domoticz_tools/)
+
 Tools to create a Domoticz plugin for local-tuya devices.
 > 💡 The Domoticz version should be `2022.1` or higher.
 
