@@ -104,18 +104,19 @@ files = [
 
 [[package]]
 name = "local-tuya"
-version = "2.2.0"
+version = "2.2.1"
 description = "Interface to Tuya devices over LAN."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "local_tuya-2.2.0-py3-none-any.whl", hash = "sha256:5c3cd4fcb82748798078c903bedc12470f4db1c0de1b095061ec2a22ee8e70a5"},
-    {file = "local_tuya-2.2.0.tar.gz", hash = "sha256:f3589946ef26348dd214a0adc70b739ddc17f030757f220a0dc530ca53d6e33c"},
+    {file = "local_tuya-2.2.1-py3-none-any.whl", hash = "sha256:07e4b4c0443316e094ae1a3ef10ae9b49007528e442096efad857a447a5ae96f"},
+    {file = "local_tuya-2.2.1.tar.gz", hash = "sha256:68b626299d2a16c88d66d2cd41d0a75e94c0265e5dd3502648da0e8cc98f78a0"},
 ]
 
 [package.dependencies]
 concurrent-tasks = ">=1.6,<2"
 pycryptodomex = ">=3,<4"
+typing-extensions = ">=4.10"
 
 [[package]]
 name = "mypy"
