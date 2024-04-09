@@ -1,4 +1,5 @@
 import logging
+from functools import partial
 from typing import Callable, Dict, Generic, Optional, Type, TypeVar
 
 from concurrent_tasks import BlockingThreadedTaskPool, ThreadedPoolContextManagerWrapper
@@ -85,6 +86,10 @@ class Plugin(Generic[T]):
                 self._protocol_config(parameters), parameters, manager
             )
             device.set_state_updated_callback(manager.update)
+            # start will stop first, so this will restart everything.
+            device.set_connection_broken_callback(
+                partial(self.start, parameters, devices)
+            )
             return device
 
         self._task_pool = BlockingThreadedTaskPool(
@@ -102,7 +107,7 @@ class Plugin(Generic[T]):
             self._manager = None
 
     def on_command(self, unit_id: int, command: UnitCommand) -> None:
-        """Send an command to the device asynchronously."""
+        """Send a command to the device asynchronously."""
         if self._task_pool and self._manager:
             # Fire and forget.
             self._task_pool.create_task(
@@ -127,7 +132,7 @@ class Plugin(Generic[T]):
             await manager.on_command(unit_id, command)
         except Exception:
             logger.exception(
-                "error sending command %s to unit %s of plugin %s",
+                "error sending command %s to unit %d of plugin %s",
                 command,
                 unit_id,
                 self.__class__.__qualname__,
