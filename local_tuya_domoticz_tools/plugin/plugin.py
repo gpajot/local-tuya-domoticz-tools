@@ -1,5 +1,4 @@
 import logging
-from functools import partial
 from typing import Callable, Dict, Generic, Optional, Type, TypeVar
 
 from concurrent_tasks import BlockingThreadedTaskPool, ThreadedPoolContextManagerWrapper
@@ -86,10 +85,6 @@ class Plugin(Generic[T]):
                 self._protocol_config(parameters), parameters, manager
             )
             device.set_state_updated_callback(manager.update)
-            # start will stop first, so this will restart everything.
-            device.set_connection_broken_callback(
-                partial(self.start, parameters, devices)
-            )
             return device
 
         self._task_pool = BlockingThreadedTaskPool(
