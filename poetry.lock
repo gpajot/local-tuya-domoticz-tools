@@ -92,6 +92,20 @@ files = [
 license = ["ukkonen"]
 
 [[package]]
+name = "imbue"
+version = "2.1.1"
+description = "Type based python dependency injection framework."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "imbue-2.1.1-py3-none-any.whl", hash = "sha256:8434460764849ef5a27d04c8722f4f48100221b61e5dbb626370a9e2a7b1545f"},
+    {file = "imbue-2.1.1.tar.gz", hash = "sha256:49d6302376e3ac5aa69c769a583fb1b1a21512421899cf40938b4e9d3697d202"},
+]
+
+[package.extras]
+fastapi = ["fastapi (>=0.111,<2)"]
+
+[[package]]
 name = "iniconfig"
 version = "2.0.0"
 description = "brain-dead simple config-ini parsing"
@@ -104,17 +118,18 @@ files = [
 
 [[package]]
 name = "local-tuya"
-version = "2.4.0"
+version = "3.0.0"
 description = "Interface to Tuya devices over LAN."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "local_tuya-2.4.0-py3-none-any.whl", hash = "sha256:b0ddd814060a6c0fc834bb20d87e69e7ea8c3811a4a3943218257961aa13b9df"},
-    {file = "local_tuya-2.4.0.tar.gz", hash = "sha256:50e331675b70c760e07203ee5452d04419b927f0a6927649d08a364df67094e3"},
+    {file = "local_tuya-3.0.0-py3-none-any.whl", hash = "sha256:ffe23f2f8061af5b0fe467e8b91af09ce389eb3cdebf779a3ae4c5bcb9f0740a"},
+    {file = "local_tuya-3.0.0.tar.gz", hash = "sha256:a2d7a16c2ca376571d4fe51f5793655958ce74780013a55b2e36c60adebe873f"},
 ]
 
 [package.dependencies]
 concurrent-tasks = ">=1.6,<2"
+imbue = ">=2.1.1,<3"
 pycryptodomex = ">=3,<4"
 typing-extensions = ">=4.10"
 
@@ -474,13 +489,13 @@ files = [
 
 [[package]]
 name = "virtualenv"
-version = "20.26.1"
+version = "20.26.2"
 description = "Virtual Python Environment builder"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "virtualenv-20.26.1-py3-none-any.whl", hash = "sha256:7aa9982a728ae5892558bff6a2839c00b9ed145523ece2274fad6f414690ae75"},
-    {file = "virtualenv-20.26.1.tar.gz", hash = "sha256:604bfdceaeece392802e6ae48e69cec49168b9c5f4a44e483963f9242eb0e78b"},
+    {file = "virtualenv-20.26.2-py3-none-any.whl", hash = "sha256:a624db5e94f01ad993d476b9ee5346fdf7b9de43ccaee0e0197012dc838a0e9b"},
+    {file = "virtualenv-20.26.2.tar.gz", hash = "sha256:82bf0f4eebbb78d36ddaee0283d43fe5736b53880b8a8cdcd37390a07ac3741c"},
 ]
 
 [package.dependencies]
@@ -506,4 +521,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8"
-content-hash = "ee1669c0b9f9f77a0c866f9efb52740f812024ef31f7d6e95941eb71941134ba"
+content-hash = "e0b8f0d6d91f4be55cdeb3adea0e6c85d3d0acfed6f65373941de7276177813c"
