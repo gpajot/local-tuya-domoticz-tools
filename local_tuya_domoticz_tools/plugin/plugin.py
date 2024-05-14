@@ -1,7 +1,12 @@
 import logging
-from typing import Callable, Dict, Generic, Optional, Type, TypeVar
+from contextlib import asynccontextmanager
+from typing import AsyncIterator, Callable, Dict, Generic, Optional, Type, TypeVar
 
-from concurrent_tasks import BlockingThreadedTaskPool, ThreadedPoolContextManagerWrapper
+from concurrent_tasks import (
+    BackgroundTask,
+    BlockingThreadedTaskPool,
+    ThreadedPoolContextManagerWrapper,
+)
 from local_tuya import Device, ProtocolConfig, State, Version
 
 from local_tuya_domoticz_tools.logger import DomoticzHandler
@@ -80,12 +85,14 @@ class Plugin(Generic[T]):
         )
         self._manager = manager
 
-        def _get_device() -> Device[T]:
+        @asynccontextmanager
+        async def _get_device() -> AsyncIterator[Device[T]]:
             device = self._on_start(
                 self._protocol_config(parameters), parameters, manager
             )
-            device.set_state_updated_callback(manager.update)
-            return device
+            async with device:
+                with BackgroundTask(_update_task, device, manager):
+                    yield device
 
         self._task_pool = BlockingThreadedTaskPool(
             context_manager=ThreadedPoolContextManagerWrapper(_get_device),
@@ -132,3 +139,8 @@ class Plugin(Generic[T]):
                 unit_id,
                 self.__class__.__qualname__,
             )
+
+
+async def _update_task(device: Device[T], manager: UnitManager[T]) -> None:
+    async for state in device.state():
+        manager.update(state)

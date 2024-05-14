@@ -1,5 +1,7 @@
+import time
 from logging import NullHandler
 from typing import Any
+from unittest.mock import call
 
 import pytest
 from local_tuya import Device, ProtocolConfig, Version
@@ -74,6 +76,13 @@ def parameters():
 
 
 @pytest.fixture()
+def domoticz_device(mocker, units):
+    _device = mocker.Mock()
+    _device.Units = units
+    return _device
+
+
+@pytest.fixture()
 def plugin(
     mocker, metadata, units, parameters, manager, manager_init, on_start, domoticz
 ):
@@ -81,18 +90,20 @@ def plugin(
         "local_tuya_domoticz_tools.plugin.plugin.LOG_HANDLER", new=NullHandler()
     )
     plugin: Plugin[Any] = Plugin("test", on_start, TheUnitId)
-    _device = mocker.Mock()
-    _device.Units = units
-    plugin.start(parameters, {"test": _device})
+    return plugin
+
+
+@pytest.fixture()
+def started_plugin(plugin, domoticz_device, parameters):
+    plugin.start(parameters, {"test": domoticz_device})
     try:
         yield plugin
     finally:
         plugin.stop()
 
 
-@pytest.mark.usefixtures("plugin")
+@pytest.mark.usefixtures("started_plugin")
 def test_start(
-    plugin,
     parameters,
     manager,
     manager_init,
@@ -122,8 +133,24 @@ def test_start(
     )
 
 
-def test_on_command(plugin, manager):
-    plugin.on_command(1, UnitCommand("cmd", 10.2, ""))
-    plugin.stop()  # drain pool
+def test_on_command(started_plugin, manager):
+    started_plugin.on_command(1, UnitCommand("cmd", 10.2, ""))
+    started_plugin.stop()  # drain pool
 
     manager.on_command.assert_awaited_once_with(1, UnitCommand("cmd", 10.2, ""))
+
+
+def test_update(plugin, manager, device, parameters, domoticz_device):
+    device.state.return_value.__aiter__.return_value = [10, 20]
+    plugin.start(parameters, {"test": domoticz_device})
+    try:
+        # Give the thread CPU time.
+        n = 0
+        while n < 10:
+            time.sleep(0.001)
+            if manager.update.call_count == 2:
+                break
+            n += 1
+        assert manager.update.call_args_list == [call(10), call(20)]
+    finally:
+        plugin.stop()
