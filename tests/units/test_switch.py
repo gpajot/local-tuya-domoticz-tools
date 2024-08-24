@@ -6,7 +6,7 @@ from local_tuya_domoticz_tools.units.base import UnitCommand, UnitValues
 from local_tuya_domoticz_tools.units.switch import switch_unit
 
 
-@pytest.fixture()
+@pytest.fixture
 def unit_kwargs(mocker):
     unit = mocker.patch("local_tuya_domoticz_tools.units.switch.Unit")
     switch_unit(1, "", 1, lambda _: asyncio.Future())

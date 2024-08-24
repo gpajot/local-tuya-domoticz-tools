@@ -12,36 +12,36 @@ class TheUnitId(UnitId):
     TWO = 2
 
 
-@pytest.fixture()
+@pytest.fixture
 def unit_one(mocker):
     unit = mocker.Mock(spec=Unit)
     unit.id = TheUnitId.ONE
     return unit
 
 
-@pytest.fixture()
+@pytest.fixture
 def unit_two(mocker):
     unit = mocker.Mock(spec=Unit)
     unit.id = TheUnitId.TWO
     return unit
 
 
-@pytest.fixture()
+@pytest.fixture
 def domoticz_unit_one(mocker):
     return mocker.Mock(spec=DomoticzUnit)
 
 
-@pytest.fixture()
+@pytest.fixture
 def domoticz_unit_two(mocker):
     return mocker.Mock(spec=DomoticzUnit)
 
 
-@pytest.fixture()
+@pytest.fixture
 def value_from_state(mocker):
     return mocker.Mock()
 
 
-@pytest.fixture()
+@pytest.fixture
 def manager(unit_one, value_from_state, domoticz_unit_one, domoticz_unit_two):
     manager: UnitManager = UnitManager(
         "the-device",
@@ -55,7 +55,7 @@ def manager(unit_one, value_from_state, domoticz_unit_one, domoticz_unit_two):
     return manager
 
 
-@pytest.fixture()
+@pytest.fixture
 def state(mocker):
     return mocker.Mock(spec=State)
 

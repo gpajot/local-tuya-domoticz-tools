@@ -15,7 +15,7 @@ from local_tuya_domoticz_tools.units import UnitCommand, UnitId
 on_start_mock = None
 
 
-@pytest.fixture()
+@pytest.fixture
 def path(mocker):
     path = Path(__file__).parent / str(uuid4())
     mocker.patch(
@@ -29,7 +29,7 @@ def path(mocker):
             shutil.rmtree(str(path))
 
 
-@pytest.fixture()
+@pytest.fixture
 def metadata(mocker):
     metadata = mocker.Mock(spec=PluginMetadata)
     metadata.package = "local_tuya"
@@ -37,7 +37,7 @@ def metadata(mocker):
     return metadata
 
 
-@pytest.fixture()
+@pytest.fixture
 def on_start(mocker, metadata):
     global on_start_mock
     on_start_mock = mocker.MagicMock()
@@ -45,19 +45,19 @@ def on_start(mocker, metadata):
     return on_start_mock
 
 
-@pytest.fixture()
+@pytest.fixture
 def plugin_module(path):
     return ".".join(
         __name__.split(".")[:-1] + [path.name, "plugins", "local_tuya", "plugin"]
     )
 
 
-@pytest.fixture()
+@pytest.fixture
 def plugin(mocker):
     return mocker.Mock(spec=Plugin)
 
 
-@pytest.fixture()
+@pytest.fixture
 def plugin_init(mocker, plugin):
     return mocker.patch(
         "local_tuya_domoticz_tools.plugin.plugin.Plugin", return_value=plugin

@@ -6,7 +6,7 @@ from local_tuya_domoticz_tools.units.base import UnitCommand, UnitValues
 from local_tuya_domoticz_tools.units.set_point import set_point_unit
 
 
-@pytest.fixture()
+@pytest.fixture
 def unit_kwargs(mocker):
     unit = mocker.patch("local_tuya_domoticz_tools.units.set_point.Unit")
     set_point_unit(1, "", 1, lambda _: asyncio.Future())

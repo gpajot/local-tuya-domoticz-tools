@@ -6,7 +6,7 @@ from local_tuya_domoticz_tools.logger import DomoticzHandler
 from local_tuya_domoticz_tools.types import DomoticzEx
 
 
-@pytest.fixture()
+@pytest.fixture
 def logger():
     logger = logging.getLogger(__name__)
     initial_level = logger.level
@@ -15,7 +15,7 @@ def logger():
     logger.setLevel(initial_level)
 
 
-@pytest.fixture()
+@pytest.fixture
 def domoticz_logger(mocker, logger):
     handler = DomoticzHandler()
     logger.addHandler(handler)
