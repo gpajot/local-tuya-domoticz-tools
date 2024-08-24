@@ -12,7 +12,7 @@ class TheEnum(str, Enum):
     TWO = "two"
 
 
-@pytest.fixture()
+@pytest.fixture
 def unit_kwargs(mocker):
     unit = mocker.patch("local_tuya_domoticz_tools.units.selector_switch.Unit")
     selector_switch_unit(1, "", 1, TheEnum, lambda _: asyncio.Future())

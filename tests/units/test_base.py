@@ -3,12 +3,12 @@ import pytest
 from local_tuya_domoticz_tools.units.base import Unit, UnitCommand, UnitValues
 
 
-@pytest.fixture()
+@pytest.fixture
 def domoticz_unit(mocker):
     return mocker.Mock()
 
 
-@pytest.fixture()
+@pytest.fixture
 def domoticz_init(mocker, domoticz_unit):
     return mocker.patch(
         "local_tuya_domoticz_tools.units.base.DomoticzEx.Unit",
@@ -16,12 +16,12 @@ def domoticz_init(mocker, domoticz_unit):
     )
 
 
-@pytest.fixture()
+@pytest.fixture
 def command_func(mocker):
     return mocker.AsyncMock()
 
 
-@pytest.fixture()
+@pytest.fixture
 def unit(domoticz_init, command_func):
     return Unit(
         id_=1,

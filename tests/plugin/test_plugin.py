@@ -19,36 +19,36 @@ class TheUnitId(UnitId):
     TWO = 2
 
 
-@pytest.fixture()
+@pytest.fixture
 def domoticz(mocker):
     return mocker.patch(
         "local_tuya_domoticz_tools.plugin.plugin.DomoticzEx", spec=DomoticzEx
     )
 
 
-@pytest.fixture()
+@pytest.fixture
 def metadata(mocker):
     metadata = mocker.Mock(spec=PluginMetadata)
     metadata.package = "test"
     return metadata
 
 
-@pytest.fixture()
+@pytest.fixture
 def device(mocker):
     return mocker.MagicMock(spec=Device)
 
 
-@pytest.fixture()
+@pytest.fixture
 def units(mocker):
     return mocker.Mock()
 
 
-@pytest.fixture()
+@pytest.fixture
 def manager(mocker):
     return mocker.Mock(spec=UnitManager)
 
 
-@pytest.fixture()
+@pytest.fixture
 def manager_init(mocker, manager):
     return mocker.patch(
         "local_tuya_domoticz_tools.plugin.plugin.UnitManager",
@@ -56,12 +56,12 @@ def manager_init(mocker, manager):
     )
 
 
-@pytest.fixture()
+@pytest.fixture
 def on_start(mocker, device):
     return mocker.Mock(return_value=device)
 
 
-@pytest.fixture()
+@pytest.fixture
 def parameters():
     return {
         "Name": "test",
@@ -75,14 +75,14 @@ def parameters():
     }
 
 
-@pytest.fixture()
+@pytest.fixture
 def domoticz_device(mocker, units):
     _device = mocker.Mock()
     _device.Units = units
     return _device
 
 
-@pytest.fixture()
+@pytest.fixture
 def plugin(
     mocker, metadata, units, parameters, manager, manager_init, on_start, domoticz
 ):
@@ -93,7 +93,7 @@ def plugin(
     return plugin
 
 
-@pytest.fixture()
+@pytest.fixture
 def started_plugin(plugin, domoticz_device, parameters):
     plugin.start(parameters, {"test": domoticz_device})
     try:
