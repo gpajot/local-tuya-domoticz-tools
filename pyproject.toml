@@ -9,7 +9,7 @@ repository = "https://github.com/gpajot/local-tuya-domoticz-tools"
 include = ["local_tuya_domoticz_tools/py.typed"]
 
 [tool.poetry.dependencies]
-python = ">=3.8"
+python = ">=3.9"
 
 local-tuya = ">=3,<4"
 concurrent-tasks = ">=1.4,<2"
